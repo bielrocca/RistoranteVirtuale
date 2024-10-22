@@ -5,8 +5,6 @@ import Rotas from './routes'
 
 import { Container, GlobalStyle } from './styles'
 
-import HomeHeader from './Componentes/Home'
-
 function App() {
   return (
     <>
