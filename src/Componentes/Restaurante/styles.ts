@@ -14,9 +14,8 @@ export const Card = styled.div`
 
 export const CardImage = styled.div`
   width: 100%;
-  height: 217px;
+  height: 250px;
   overflow-y: hidden;
-
   img {
     width: 100%;
   }

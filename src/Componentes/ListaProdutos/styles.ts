@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-export const ProductList = styled.div`
+
+export const ProductListStyle = styled.div`
   max-width: 1024px;
   width: 100%;
   margin: 56px auto 120px;

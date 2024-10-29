@@ -1,36 +1,43 @@
 import Footer from '../../Componentes/Footer'
-import Header from '../../Componentes/Home'
-import RestaurantList from '../../Componentes/ListaRestaurante'
-import RestaurantModel from '../../models/Restaurante'
-import hiokiSushi from '../../Assets/Imagens/hiokiSushi.svg'
-import dolceVita from '../../Assets/Imagens/DolceVita.svg'
+import ListaRestaurante from '../../Componentes/ListaRestaurante'
 
-const restaurantes: RestaurantModel[] = [
-  {
-    id: 1,
-    image: hiokiSushi,
-    name: 'Restaurante 1',
-    rating: '4.9',
-    description:
-      'Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida. Experimente o Japão sem sair do lar com nosso delivery!',
-    infos: ['Japonesa', 'Destaque da Semana']
-  },
-  {
-    id: 2,
-    image: dolceVita,
-    name: 'Restaurante 2',
-    rating: '4.6',
-    description:
-      'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
-    infos: ['Italiana']
-  }
-]
+import HeaderHome from '../../Componentes/Home'
+import { useEffect, useState } from 'react'
 
-const Home = () => (
-  <>
-    <Header />
-    <RestaurantList restaurants={restaurantes} />
-    <Footer />
-  </>
-)
+export type Cardapio = {
+  foto: string
+  preco: number
+  id: number
+  nome: string
+  descricao: string
+  porcao: string
+}
+
+export type Restaurante = {
+  id: number
+  titulo: string
+  destacado: boolean
+  tipo: string
+  avaliacao: string
+  descricao: string
+  capa: string
+  cardapio: Cardapio[]
+}
+
+const Home = () => {
+  const [restaurantes, setRestaurantes] = useState<Restaurante[]>([])
+  useEffect(() => {
+    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
+      .then((res) => res.json())
+      .then((res) => setRestaurantes(res))
+  }, [])
+  return (
+    <>
+      <HeaderHome />
+      <ListaRestaurante restaurantes={restaurantes} />
+      <Footer />
+    </>
+  )
+}
+
 export default Home
