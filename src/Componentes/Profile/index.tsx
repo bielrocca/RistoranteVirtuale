@@ -1,11 +1,13 @@
 import { Cabecalho, CabecalhoImg, HomeLink, Logo } from './styles'
 import logo from '../../Assets/Imagens/logo_efood.png'
 import bgImg from '../../Assets/Imagens/fundo_header.png'
-import dolceVita from '../../Assets/Imagens/DolceVita.svg'
-import Footer from '../Footer'
-import ListaProdutos from '../ListaProdutos'
+import { Restaurante } from '../../Pages/Home'
 
-const RestaurantProfile = () => (
+type Props = {
+  restaurante: Restaurante
+}
+
+const RestaurantProfile = ({ restaurante }: Props) => (
   <>
     <Cabecalho style={{ backgroundImage: `url(${bgImg})` }}>
       <div>
@@ -14,14 +16,12 @@ const RestaurantProfile = () => (
         <p>0 produto(s) no carrinho</p>
       </div>
     </Cabecalho>
-    <CabecalhoImg style={{ backgroundImage: `url(${dolceVita})` }}>
+    <CabecalhoImg style={{ backgroundImage: `url(${restaurante.capa})` }}>
       <div>
-        <h1>Italiana</h1>
-        <h1>La Dolce Vita Trattoria</h1>
+        <h1>{restaurante.tipo}</h1>
+        <h1>{restaurante.titulo}</h1>
       </div>
     </CabecalhoImg>
-    <ListaProdutos />
-    <Footer />
   </>
 )
 
