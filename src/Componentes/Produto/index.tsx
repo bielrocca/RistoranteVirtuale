@@ -1,8 +1,13 @@
 import { useState } from 'react'
+
 import { Modal, ModalContent, ProductCard } from './styles'
+
 import close from '../../Assets/Imagens/close.svg'
+import { useDispatch } from 'react-redux'
+import { add, open } from '../../Store/Reducers/cart'
 
 type Props = {
+  id: number
   nome: string
   descricao: string
   foto: string
@@ -10,15 +15,22 @@ type Props = {
   preco: number
 }
 
-const Product = ({ nome, descricao, porcao, foto, preco }: Props) => {
-  const formataPreco = (preco = 0) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(preco)
-  }
+export const formataPreco = (preco = 0) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(preco)
+}
 
+const Produto = ({ id, nome, descricao, porcao, foto, preco }: Props) => {
   const [isVisible, setIsVisible] = useState(false)
+  const dispatch = useDispatch()
+
+  const addToCart = () => {
+    const product = { id, nome, descricao, porcao, foto, preco }
+    dispatch(add(product))
+    dispatch(open())
+  }
 
   const showModal = () => {
     if (isVisible) {
@@ -31,7 +43,6 @@ const Product = ({ nome, descricao, porcao, foto, preco }: Props) => {
     if (descricao.length > 150) {
       return descricao.slice(0, 150) + '...'
     }
-
     return descricao
   }
 
@@ -58,9 +69,9 @@ const Product = ({ nome, descricao, porcao, foto, preco }: Props) => {
               </div>
               <p>{descricao}</p>
               <p>Porção: {porcao}</p>
-              <button>{`Adicionar ao carrinho - ${formataPreco(
-                preco
-              )}`}</button>
+              <button
+                onClick={addToCart}
+              >{`Adicionar ao carrinho - ${formataPreco(preco)}`}</button>
             </div>
           </div>
         </ModalContent>
@@ -69,4 +80,5 @@ const Product = ({ nome, descricao, porcao, foto, preco }: Props) => {
     </>
   )
 }
-export default Product
+
+export default Produto

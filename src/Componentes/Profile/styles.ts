@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const Cabecalho = styled.div`
   width: 100%;
@@ -26,6 +26,10 @@ export const Cabecalho = styled.div`
 
 export const Logo = styled.img`
   width: 125px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 80px;
+  }
 `
 export const HomeLink = styled(Link)`
   text-decoration: none;

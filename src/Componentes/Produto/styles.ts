@@ -100,6 +100,7 @@ export const ModalContent = styled.div`
         font-weight: 700;
         background-color: ${cores.bgFooter};
         color: ${cores.fontColor};
+        cursor: pointer;
       }
     }
   }

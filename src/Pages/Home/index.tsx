@@ -1,7 +1,7 @@
 import Footer from '../../Componentes/Footer'
 import ListaRestaurante from '../../Componentes/ListaRestaurante'
 
-import HeaderHome from '../../Componentes/Home'
+import Header from '../../Componentes/Header'
 import { useEffect, useState } from 'react'
 
 export type Cardapio = {
@@ -33,7 +33,7 @@ const Home = () => {
   }, [])
   return (
     <>
-      <HeaderHome />
+      <Header />
       <ListaRestaurante restaurantes={restaurantes} />
       <Footer />
     </>
