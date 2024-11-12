@@ -61,4 +61,5 @@ export const {
   useGetRestaurantsQuery,
   usePurchaseMutation
 } = api
+
 export default api

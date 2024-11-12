@@ -3,24 +3,27 @@ import Produto from '../Produto'
 import { ProductListStyle } from './styles'
 
 type Props = {
-  restaurante: Cardapio[]
+  produtos: Cardapio[]
 }
 
-const ListaProdutos = ({ restaurante }: Props) => {
+const ProductList = ({ produtos }: Props) => {
   return (
-    <ProductListStyle>
-      {restaurante.map((produto) => (
-        <Produto
-          key={produto.id}
-          descricao={produto.descricao}
-          nome={produto.nome}
-          foto={produto.foto}
-          porcao={produto.porcao}
-          preco={produto.preco}
-        />
-      ))}
-    </ProductListStyle>
+    <div className="container">
+      <ProductListStyle>
+        {produtos.map((produto) => (
+          <Produto
+            key={produto.id}
+            id={produto.id}
+            descricao={produto.descricao}
+            nome={produto.nome}
+            foto={produto.foto}
+            porcao={produto.porcao}
+            preco={produto.preco}
+          />
+        ))}
+      </ProductListStyle>
+    </div>
   )
 }
 
-export default ListaProdutos
+export default ProductList

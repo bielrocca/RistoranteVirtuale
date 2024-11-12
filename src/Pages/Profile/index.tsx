@@ -1,25 +1,17 @@
-import { useEffect, useState } from 'react'
-import Footer from '../../Componentes/Footer'
-import HeaderProfile from '../../Componentes/Profile'
 import { useParams } from 'react-router-dom'
+
+import { useGetRestaurantSelectedQuery } from '../../Services/API'
+
+import Footer from '../../Componentes/Footer'
+
 import ProductList from '../../Componentes/ListaProdutos'
-import { Restaurante } from '../Home'
+import RestaurantProfile from '../../Componentes/Profile'
 
 const Profile = () => {
   const { id } = useParams()
-  const [restaurante, setRestaurante] = useState<Restaurante | null>(null)
 
-  useEffect(() => {
-    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
-      .then((res) => res.json())
-      .then((res) => {
-        // Verifica se a resposta é uma array, se não, converte para uma array com um único elemento
-        if (!Array.isArray(res)) {
-          res = [res]
-        }
-        setRestaurante(res[0]) // Define o primeiro restaurante retornado pela API
-      })
-  }, [id])
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { data: restaurante } = useGetRestaurantSelectedQuery(id!)
 
   if (!restaurante) {
     return <h3>Carregando...</h3>
@@ -27,8 +19,8 @@ const Profile = () => {
 
   return (
     <>
-      <HeaderProfile restaurante={restaurante} />
-      <ProductList restaurante={restaurante.cardapio} />
+      <RestaurantProfile restaurante={restaurante} />
+      <ProductList produtos={restaurante.cardapio} />
       <Footer />
     </>
   )

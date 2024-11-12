@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 import { Link } from 'react-router-dom'
 
 export const Card = styled.div`
@@ -18,6 +18,16 @@ export const CardImage = styled.div`
   overflow-y: hidden;
   img {
     width: 100%;
+  }
+
+  @media (min-width: ${breakpoints.tablet}) {
+    height: 0;
+    height: 150px;
+  }
+
+  @media (min-width: ${breakpoints.desktop}) {
+    height: 0;
+    height: 200px;
   }
 `
 
